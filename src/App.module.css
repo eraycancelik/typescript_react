@@ -1,0 +1,71 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+@font-face {
+  font-family: "logoFont";
+  src: url("../public/Assets/fonts/Mrrobot-g123.ttf") format("opentype");
+}
+
+:root {
+  --header-color: rgb(0, 0, 0);
+  --theme-color: rgb(255, 0, 0);
+  --secondary-color: rgba(245, 245, 245, 0);
+  --list-bg-color: rgb(233, 230, 230);
+  --main-bg-color: rgb(255, 255, 255);
+  --price-color: rgb(80, 80, 80);
+  --message-color: rgb(124, 124, 124);
+  --price-font: Arial, Helvetica, sans-serif;
+  --product-card-color: rgb(255, 255, 255);
+  --product-shadow: var(--main-shadow);
+  --main-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  --button-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  --quantity-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  --addBasket-shadow: rgb(255, 0, 0) 0px 1px 1px,
+    rgb(255, 122, 122) 0px 0px 0px 3px;
+}
+/* --main-color: rgb(255, 247, 141); 9/10 */
+/* --main-color: rgb(238, 238, 238); 9/10 */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(90, 90, 90);
+  background-color: var(--main-bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.flexContainer {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1300px;
+  width: 100%;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1.1fr 4fr;
+  background-color: var(--main-bg-color);
+}
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .gridContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

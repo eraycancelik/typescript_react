@@ -1,0 +1,68 @@
+.addBasket {
+  box-shadow: var(--quantity-shadow);
+  border-radius: 6px;
+  color: var(--price-color);
+  margin-top: 30px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0px;
+}
+.quantity {
+  height: 45px;
+  width: 90px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.quantityButton {
+  cursor: pointer;
+  background-color: rgb(177, 177, 177);
+  color: aliceblue;
+  border: none;
+  width: 25px;
+  height: 35px;
+}
+.quantityButton:active {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+.quantityHolder {
+  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 30px;
+  display: flex;
+  text-align: center;
+  border: solid black 1px;
+  border-radius: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
+  background-color: rgb(0, 0, 0);
+}
+.quantityHolder:hover {
+  box-shadow: var(--quantity-shadow);
+}
+
+.addBasketButton {
+  background-color: var(--header-color);
+  cursor: pointer;
+  color: white;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 35px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bolder;
+  transition: 0.1s;
+  margin-left: 2px;
+}
+.addBasketButton:active {
+  box-shadow: var(--addBasket-shadow);
+}
