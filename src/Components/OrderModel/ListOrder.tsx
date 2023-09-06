@@ -2,7 +2,7 @@ import style from "./ListOrder.module.css";
 import ModelOverlayList from "./ModelOverlayList";
 import Button from "../Ui/Button";
 import { useState } from "react";
-import { orderList } from "../../Data/orderList";
+import { orderList, addItem } from "../../Data/orderList";
 type Props = {
   id: number;
   order: boolean;
@@ -46,7 +46,7 @@ const ListOrder = (props: Props) => {
       orderList.filter((order) => order.product_id === props.id).length === 0
     ) {
       console.log("new item added");
-      orderList.push(orderDetails);
+      addItem(orderDetails);
     } else {
       orderList.map((order) => {
         if (orderDetails.product_id === order.product_id) {

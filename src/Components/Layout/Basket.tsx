@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import style from "./Basket.module.css";
 import CartIcon from "../Card/CartIcon";
 import { orderList } from "../../Data/orderList";
@@ -7,7 +7,7 @@ type Props = {};
 const Basket = (props: Props) => {
   let sum: number = 0;
   orderList.map((order) => {
-    sum+=order.total_price
+    sum += order.total_price;
   });
   const [list, setList] = useState<boolean>(false);
   const listOrders = () => {

@@ -6,5 +6,17 @@ interface OrderDetails {
   product_quantity: number;
   total_price: number;
 }
-
-export const orderList: OrderDetails[] = [];
+const orderList: OrderDetails[] = [];
+const addItem = (order: OrderDetails) => {
+  orderList.push(order);
+};
+const removeItem = (
+  id: number,
+  rendered: OrderDetails[],
+  setRendered: (rendered: OrderDetails[]) => void
+) => {
+  const newOrderList = [...rendered];
+  newOrderList.splice(id, 1);
+  setRendered(newOrderList);
+};
+export { orderList, removeItem, addItem };

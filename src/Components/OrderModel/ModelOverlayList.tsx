@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./ModelOverlayList.module.css";
 import OrderTableQuantity from "../Quantity/OrderTableQuantity";
-import { orderList } from "../../Data/orderList";
 type Props = {
+  remove?: (id: number) => void;
   id: number;
   className: string;
   product: string;
@@ -21,6 +21,13 @@ const ModelOverlayList = (props: Props) => {
     props.onQuantityHolder(quantityNew);
   }, [quantityNew]);
 
+
+  const deleteItem = () => {
+    if (props.remove) {
+      props.remove(props.id);
+    }
+  };
+
   return (
     <tr>
       <td>
@@ -38,7 +45,7 @@ const ModelOverlayList = (props: Props) => {
       <td>{props.price} TL</td>
       <td>{quantityNew * props.price} TL</td>
       <td>
-        <button className={style.deleteButton} onClick={props.onClick}>
+        <button className={style.deleteButton} onClick={deleteItem}>
           delete
         </button>
       </td>

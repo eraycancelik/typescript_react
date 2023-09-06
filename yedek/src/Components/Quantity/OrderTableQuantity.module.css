@@ -1,0 +1,53 @@
+.addBasket {
+  box-shadow: var(--quantity-shadow);
+  color: var(--price-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 0px;
+  background-color: var(--theme-color);
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+}
+.quantity {
+  height: 30px;
+  width: 90px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.quantityButton {
+  cursor: pointer;
+  background-color: rgb(0, 0, 0);
+  color: aliceblue;
+  border: none;
+  width: 35px;
+  height: 32px;
+  padding-bottom: 4px;
+}
+.quantityButton:active {
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+.quantityHolder {
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 29px;
+  display: flex;
+  text-align: center;
+  border: none;
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-bottom: 2px;
+  background-color: rgb(255, 255, 255);
+}
+.quantityHolder:hover {
+  box-shadow: var(--quantity-shadow);
+}

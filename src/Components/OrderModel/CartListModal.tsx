@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import style from "./CartListModal.module.css";
 import ModelOverlayList from "./ModelOverlayList";
 import Button from "../Ui/Button";
-import { orderList } from "../../Data/orderList";
+import { orderList, removeItem } from "../../Data/orderList";
 // these are the props that will be used in the CartListModal component
 type Props = {
   onClick: () => void;
@@ -15,22 +15,36 @@ type CartModalOverlayProps = {
   onClick: () => void;
   className: string;
 };
+interface OrderDetails {
+  product_id: number;
+  product_name: string;
+  product_photo: string;
+  product_price: number;
+  product_quantity: number;
+  total_price: number;
+}
+
 // ------------------------------------------------this is the Backdrop component----------------------------------------------
 const Backdrop = (props: BackdropProps) => {
   return <div className={style.backdrop} onClick={props.onClick} />;
 };
 // ----------------------------------------------this is the CartListModal component----------------------------------------------
 const CartModalOverlay = (props: CartModalOverlayProps) => {
+  const [rendered, setRendered] = useState(orderList);
   let id: number = 0;
   let products: string = "";
   let photos: string = "";
   let prices: number = 0;
   let quantitys: number = 0;
 
-  const somea = () => {
-    console.log(orderList, id);
+  const remove = (id: number) => {
+    removeItem(id, rendered, setRendered);
   };
-  const renderedItems = orderList.map(
+  const somea = () => {
+    console.log(orderList);
+  };
+
+  const renderedItems = rendered.map(
     (order, index) => (
       (id = order.product_id),
       (products = order.product_name),
@@ -39,6 +53,7 @@ const CartModalOverlay = (props: CartModalOverlayProps) => {
       (quantitys = order.product_quantity),
       (
         <ModelOverlayList
+          remove={remove}
           id={index}
           key={index}
           onQuantityHolder={() => {}}
@@ -90,5 +105,4 @@ const CartListModal = (props: Props) => {
     </Fragment>
   );
 };
-
 export default CartListModal;

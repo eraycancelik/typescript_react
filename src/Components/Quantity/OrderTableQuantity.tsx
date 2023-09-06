@@ -11,22 +11,34 @@ const OrderTableQuantity = (props: Props) => {
   const [quantityNew, setQuantity] = useState<number>(props.quantity);
   const increaseQuantity = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
-    setQuantity(quantityNew + 1);
+    if (orderList[props.id]) {
+      orderList[props.id].product_quantity = quantityNew + 1;
+      orderList[props.id].total_price =
+        orderList[props.id].product_price * (quantityNew + 1);
+    } else {
+      setQuantity(quantityNew + 1);
+    }
     props.quantityHolder(quantityNew + 1);
-    orderList[props.id].product_quantity = quantityNew + 1;
   };
   const decreaseQuantity = () => {
     if (quantityNew > 1) {
       setQuantity((prevQuantity) => prevQuantity - 1);
-      setQuantity(quantityNew - 1);
-      orderList[props.id].product_quantity = quantityNew - 1;
+      if (orderList[props.id]) {
+        orderList[props.id].product_quantity = quantityNew - 1;
+        orderList[props.id].total_price =
+          orderList[props.id].product_price * (quantityNew - 1);
+      } else {
+        setQuantity(quantityNew - 1);
+      }
       props.quantityHolder(quantityNew - 1);
     }
   };
   const handleQuantityChange = (event: ChangeEvent<HTMLInputElement>) => {
     let quantityNew = parseInt(event.target.value, 10);
     setQuantity(quantityNew);
-    orderList[props.id].product_quantity = quantityNew + 1;
+    orderList[props.id].product_quantity = quantityNew;
+    orderList[props.id].total_price =
+      orderList[props.id].product_price * quantityNew;
     props.quantityHolder(quantityNew);
   };
   return (
