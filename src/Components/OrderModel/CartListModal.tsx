@@ -15,15 +15,6 @@ type CartModalOverlayProps = {
   onClick: () => void;
   className: string;
 };
-interface OrderDetails {
-  product_id: number;
-  product_name: string;
-  product_photo: string;
-  product_price: number;
-  product_quantity: number;
-  total_price: number;
-}
-
 // ------------------------------------------------this is the Backdrop component----------------------------------------------
 const Backdrop = (props: BackdropProps) => {
   return <div className={style.backdrop} onClick={props.onClick} />;
@@ -43,30 +34,36 @@ const CartModalOverlay = (props: CartModalOverlayProps) => {
   const somea = () => {
     console.log(orderList);
   };
-
-  const renderedItems = rendered.map(
-    (order, index) => (
-      (id = order.product_id),
-      (products = order.product_name),
-      (photos = order.product_photo),
-      (prices = order.product_price),
-      (quantitys = order.product_quantity),
-      (
-        <ModelOverlayList
-          remove={remove}
-          id={index}
-          key={index}
-          onQuantityHolder={() => {}}
-          className={style.sa}
-          product={products}
-          photo={photos}
-          price={prices}
-          quantity={quantitys}
-          onClick={props.onClick}
-        />
-      )
-    )
+  let renderedItems: any = (
+    <tr className={style.empty}>
+      <td className={style.conte}>cart is empty</td>
+    </tr>
   );
+  if (orderList.length !== 0) {
+    renderedItems = rendered.map(
+      (order, index) => (
+        (id = order.product_id),
+        (products = order.product_name),
+        (photos = order.product_photo),
+        (prices = order.product_price),
+        (quantitys = order.product_quantity),
+        (
+          <ModelOverlayList
+            remove={remove}
+            id={index}
+            key={index}
+            onQuantityHolder={() => {}}
+            className={style.sa}
+            product={products}
+            photo={photos}
+            price={prices}
+            quantity={quantitys}
+            onClick={props.onClick}
+          />
+        )
+      )
+    );
+  }
 
   //-------this is the renderedItems variable--------
 

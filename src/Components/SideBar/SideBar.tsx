@@ -1,13 +1,16 @@
 import style from "./SideBar.module.css";
 import React, { useState } from "react";
 import Category from "./Category";
+import ReactSlider from "react-slider";
+import { categories } from "../../Data/categories";
+
+// To include the default styles
+import "react-rangeslider/lib/index.css";
 type CategoriesProps = {
-  categories: string[];
+  categoryHandler: (category: string[]) => void;
 };
 const SideBar: React.FC<CategoriesProps> = (props) => {
-  const [initialCategory, setInitialCategory] = useState<string[]>(
-    props.categories
-  );
+  const [initialCategory, setInitialCategory] = useState<string[]>(categories);
   const [categoryHandler, setCategoryHandler] = useState<string[]>([]);
 
   const onRemoveCategory = (category: string): void => {
@@ -33,11 +36,7 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
     }
   };
   const filter = () => {
-    console.clear();
-    console.log("categoryHandler");
-    console.log(categoryHandler);
-    console.log("initialCategory");
-    console.log(initialCategory);
+    props.categoryHandler(categoryHandler);
   };
 
   let filteredArea = categoryHandler.map((category, index) => (
@@ -58,6 +57,9 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
       onClick={() => onRemoveCategory(category)}
     />
   ));
+  const MIN = 100;
+  const MAX = 12000;
+  const [values, setValues] = useState([MIN, MAX]);
   return (
     <div className={style.sideBar}>
       <div className={style.fier}>
@@ -88,17 +90,19 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
         <p className={style.priceArea}>Shop by Price</p>
         <div className={style.priceFilter}>
           <div className={style.list}>
-            <input
-              className={style.min}
-              type="number"
-              placeholder="minimum price"
+            <ReactSlider
+              className={style.horizontalSlider}
+              marks={[5, 6, 7, 8, 9]}
+              markClassName="example-mark"
+              min={0}
+              max={9}
+              invert
+              thumbClassName="example-thumb"
+              trackClassName="example-track"
+              renderThumb={(props, state) => (
+                <div {...props}>{state.valueNow}</div>
+              )}
             />
-            <span>TL</span>
-            <input
-              className={style.max}
-              type="number"
-              placeholder="maximum price"
-            />{" "}
             <span>TL</span>
           </div>
         </div>

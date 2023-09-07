@@ -21,7 +21,6 @@ const ModelOverlayList = (props: Props) => {
     props.onQuantityHolder(quantityNew);
   }, [quantityNew]);
 
-
   const deleteItem = () => {
     if (props.remove) {
       props.remove(props.id);
