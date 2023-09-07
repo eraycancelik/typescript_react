@@ -15,46 +15,47 @@ interface Product {
   Category: string;
 }
 
-interface OrderDetails {
-  product_id: number;
-  product_name: string;
-  product_photo: string;
-  product_price: number;
-  product_quantity: number;
-  total_price: number;
-}
-
 type Props = {};
 
-const App: React.FC<Props> = (props) => {
+const App: React.FC<Props> = () => {
   const [categoryHandlers, setCategoryHandlers] = useState<string[]>([]);
+  const [productsArea, setProductsArea] = useState<Product[]>(products);
+  const [pricesArea, setPricesArea] = useState<number[]>(
+    products.map((product) => product.Price)
+  );
+  let filteredProducts: Product[] = [];
+  let prices: number[] = [];
+  
   const categoryHandler = (category: string[]) => {
     setCategoryHandlers(category);
   };
 
-  const [productsArea, setProductsArea] = useState<Product[]>([]);
-  let filteredProducts: Product[] = [];
   useEffect(() => {
     if (categoryHandlers.length === 0) {
       setProductsArea(products);
+      setPricesArea(products.map((product) => product.Price));
       return;
-    }
-    categoryHandlers.forEach((category) => {
-      const categoryProducts: Product[] = products.filter(
-        (product) => product.Category === category
-      );
+    } else {
+      categoryHandlers.forEach((category) => {
+        const categoryProducts: Product[] = products.filter(
+          (product) => product.Category === category
+        );
 
-      categoryProducts.forEach((product) => {
-        filteredProducts.push({
-          Product_id: product.Product_id,
-          Product: product.Product,
-          Photo: product.Photo,
-          Price: product.Price,
-          Category: product.Category,
+        categoryProducts.forEach((product) => {
+          filteredProducts.push({
+            Product_id: product.Product_id,
+            Product: product.Product,
+            Photo: product.Photo,
+            Price: product.Price,
+            Category: product.Category,
+          });
+          prices.push(product.Price);
         });
       });
-    });
-    setProductsArea(filteredProducts);
+
+      setProductsArea(filteredProducts);
+      setPricesArea(prices);
+    }
   }, [categoryHandlers]);
 
   return (
@@ -65,7 +66,7 @@ const App: React.FC<Props> = (props) => {
           <Information />
         </div>
         <div className={style.gridContainer}>
-          <SideBar categoryHandler={categoryHandler} />
+          <SideBar pricesList={pricesArea} categoryHandler={categoryHandler} />
           <ProductList productList={productsArea} />
         </div>
       </div>

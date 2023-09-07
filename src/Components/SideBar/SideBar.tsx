@@ -1,18 +1,19 @@
 import style from "./SideBar.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Category from "./Category";
-import ReactSlider from "react-slider";
+import PriceSlider from "./PriceSlider";
+
 import { categories } from "../../Data/categories";
 
 // To include the default styles
 import "react-rangeslider/lib/index.css";
 type CategoriesProps = {
+  pricesList: number[];
   categoryHandler: (category: string[]) => void;
 };
 const SideBar: React.FC<CategoriesProps> = (props) => {
   const [initialCategory, setInitialCategory] = useState<string[]>(categories);
   const [categoryHandler, setCategoryHandler] = useState<string[]>([]);
-
   const onRemoveCategory = (category: string): void => {
     if (!categoryHandler.includes(category)) {
       setCategoryHandler((prevCategoryHandler) => [
@@ -35,7 +36,11 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
       );
     }
   };
-  const filter = () => {
+  let priceValues = props.pricesList;
+  useEffect(() => {
+    priceValues = props.pricesList;
+  }, [props.pricesList]);
+  const filter = async () => {
     props.categoryHandler(categoryHandler);
   };
 
@@ -57,9 +62,6 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
       onClick={() => onRemoveCategory(category)}
     />
   ));
-  const MIN = 100;
-  const MAX = 12000;
-  const [values, setValues] = useState([MIN, MAX]);
   return (
     <div className={style.sideBar}>
       <div className={style.fier}>
@@ -90,20 +92,7 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
         <p className={style.priceArea}>Shop by Price</p>
         <div className={style.priceFilter}>
           <div className={style.list}>
-            <ReactSlider
-              className={style.horizontalSlider}
-              marks={[5, 6, 7, 8, 9]}
-              markClassName="example-mark"
-              min={0}
-              max={9}
-              invert
-              thumbClassName="example-thumb"
-              trackClassName="example-track"
-              renderThumb={(props, state) => (
-                <div {...props}>{state.valueNow}</div>
-              )}
-            />
-            <span>TL</span>
+            <PriceSlider priceValues={priceValues} />
           </div>
         </div>
         <div className={style.filterArea}>

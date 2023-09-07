@@ -5,11 +5,10 @@
   box-shadow: var(--main-shadow);
   margin-bottom: 50px;
   border-radius: 10px;
-  padding-left: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: start;
+  align-items: center;
   height: 825px;
 }
 
@@ -18,6 +17,9 @@
   height: 450px;
 }
 .priceInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 300px;
 }
 .filteredCategory {
@@ -29,27 +31,12 @@
   cursor: pointer;
 }
 
-.min,
-.max {
-  margin-right: 10px;
-  margin-top: 10px;
-  width: 150px;
-  height: 30px;
-  font-size: 15px;
-  border: 2px solid black;
-  border-radius: 10px;
-  padding-left: 15px;
-}
-.min {
-  margin-right: 15px;
-}
 .filterArea {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 80px;
-  margin-right: 20px;
   text-align: center;
 }
 .filterButton {
@@ -113,4 +100,3 @@
 .horizontalSlider {
   background-color: aqua;
 }
-
