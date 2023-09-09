@@ -6,12 +6,12 @@ type Props = {
 };
 
 const PriceSlider = (props: Props) => {
-  useEffect(() => {
-    setValues([MIN, MAX]);
-  }, [props.priceValues]);
   const MIN = Math.min(...props.priceValues);
   const MAX = Math.max(...props.priceValues);
   const [values, setValues] = useState([MIN, MAX]);
+  useEffect(() => {
+    setValues([MIN, MAX]);
+  }, [props.priceValues]);
   return (
     <div className="app">
       <div className="box">

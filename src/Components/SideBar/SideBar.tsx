@@ -2,11 +2,7 @@ import style from "./SideBar.module.css";
 import React, { useEffect, useState } from "react";
 import Category from "./Category";
 import PriceSlider from "./PriceSlider";
-
 import { categories } from "../../Data/categories";
-
-// To include the default styles
-import "react-rangeslider/lib/index.css";
 type CategoriesProps = {
   pricesList: number[];
   categoryHandler: (category: string[]) => void;
@@ -40,9 +36,6 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
   useEffect(() => {
     priceValues = props.pricesList;
   }, [props.pricesList]);
-  const filter = async () => {
-    props.categoryHandler(categoryHandler);
-  };
 
   let filteredArea = categoryHandler.map((category, index) => (
     <p
@@ -62,6 +55,13 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
       onClick={() => onRemoveCategory(category)}
     />
   ));
+  // const increasePopulation = useBearStore(
+  //   (state: any) => state.increasePopulation
+  // );
+  const filter = async () => {
+    // increasePopulation();
+    props.categoryHandler(categoryHandler);
+  };
   return (
     <div className={style.sideBar}>
       <div className={style.fier}>
