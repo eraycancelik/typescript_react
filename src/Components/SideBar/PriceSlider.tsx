@@ -3,15 +3,22 @@ import "./PriceSlider.css";
 import { useEffect, useState } from "react";
 type Props = {
   priceValues: number[];
+  priceValuesHolder: (values: number[]) => void;
 };
 
 const PriceSlider = (props: Props) => {
   const MIN = Math.min(...props.priceValues);
   const MAX = Math.max(...props.priceValues);
   const [values, setValues] = useState([MIN, MAX]);
+
   useEffect(() => {
     setValues([MIN, MAX]);
   }, [props.priceValues]);
+
+  useEffect(() => {
+    props.priceValuesHolder([values[0], values[1]]);
+  }, [values]);
+
   return (
     <div className="app">
       <div className="box">

@@ -14,7 +14,6 @@ interface Product {
   Price: number;
   Category: string;
 }
-
 type Props = {};
 
 const App: React.FC<Props> = () => {
@@ -25,38 +24,46 @@ const App: React.FC<Props> = () => {
   );
   let filteredProducts: Product[] = [];
   let prices: number[] = [];
-  
+
   const categoryHandler = (category: string[]) => {
     setCategoryHandlers(category);
   };
-
+  const sliderPricesHolder = (values: number[]) => {
+    setSliderPrices(values);
+  };
+  const [sliderPrices, setSliderPrices] = useState<number[]>([
+    Math.min(1),
+    Math.max(300),
+  ]);
   useEffect(() => {
     if (categoryHandlers.length === 0) {
-      setProductsArea(products);
+      const newProducts: Product[] = products.filter((product) => {
+        return (
+          product.Price >= sliderPrices[0] && product.Price <= sliderPrices[1]
+        );
+      });
+      setProductsArea(newProducts);
       setPricesArea(products.map((product) => product.Price));
       return;
     } else {
+      const filteredProducts: Product[] = [];
+      const prices: number[] = [];
+
       categoryHandlers.forEach((category) => {
         const categoryProducts: Product[] = products.filter(
-          (product) => product.Category === category
+          (product) =>
+            product.Category === category &&
+            product.Price >= sliderPrices[0] &&
+            product.Price <= sliderPrices[1]
         );
-
-        categoryProducts.forEach((product) => {
-          filteredProducts.push({
-            Product_id: product.Product_id,
-            Product: product.Product,
-            Photo: product.Photo,
-            Price: product.Price,
-            Category: product.Category,
-          });
-          prices.push(product.Price);
-        });
+        filteredProducts.push(...categoryProducts);
+        prices.push(...categoryProducts.map((product) => product.Price));
       });
 
       setProductsArea(filteredProducts);
       setPricesArea(prices);
     }
-  }, [categoryHandlers]);
+  }, [categoryHandlers, sliderPrices]);
 
   return (
     <div className={style.app}>
@@ -66,7 +73,11 @@ const App: React.FC<Props> = () => {
           <Information />
         </div>
         <div className={style.gridContainer}>
-          <SideBar pricesList={pricesArea} categoryHandler={categoryHandler} />
+          <SideBar
+            onPriceHolder={sliderPricesHolder}
+            pricesList={pricesArea}
+            categoryHandler={categoryHandler}
+          />
           <ProductList productList={productsArea} />
         </div>
       </div>

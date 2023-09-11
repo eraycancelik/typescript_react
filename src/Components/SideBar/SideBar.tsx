@@ -6,6 +6,7 @@ import { categories } from "../../Data/categories";
 type CategoriesProps = {
   pricesList: number[];
   categoryHandler: (category: string[]) => void;
+  onPriceHolder: (values: number[]) => void;
 };
 const SideBar: React.FC<CategoriesProps> = (props) => {
   const [initialCategory, setInitialCategory] = useState<string[]>(categories);
@@ -58,10 +59,18 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
   // const increasePopulation = useBearStore(
   //   (state: any) => state.increasePopulation
   // );
+  const [priceValueHolder, setPriceValueHolder] = useState<number[]>([
+    priceValues[0],
+    priceValues[priceValues[1]],
+  ]);
+  const onPriceHolder = (values: number[]) => {
+    setPriceValueHolder(values);
+  };
   const filter = async () => {
-    // increasePopulation();
+    props.onPriceHolder(priceValueHolder)
     props.categoryHandler(categoryHandler);
   };
+
   return (
     <div className={style.sideBar}>
       <div className={style.fier}>
@@ -92,7 +101,10 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
         <p className={style.priceArea}>Shop by Price</p>
         <div className={style.priceFilter}>
           <div className={style.list}>
-            <PriceSlider priceValues={priceValues} />
+            <PriceSlider
+              priceValuesHolder={onPriceHolder}
+              priceValues={priceValues}
+            />
           </div>
         </div>
         <div className={style.filterArea}>
