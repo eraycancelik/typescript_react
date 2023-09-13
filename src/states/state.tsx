@@ -9,6 +9,7 @@ let prices: number[] = [];
 const productsArea = products.map((product) => {
   prices.push(product.Price);
 });
+
 export const useSliderStore = create<useSliderStoreType>((set) => ({
   values: [Math.min(...prices), Math.max(...prices)],
   setValues: (values) => set({ values }),

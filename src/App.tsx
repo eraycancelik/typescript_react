@@ -6,7 +6,7 @@ import SideBar from "./Components/SideBar/SideBar";
 import Information from "./Components/Ui/Information";
 import Footer from "./Components/Layout/Footer";
 import { products } from "./Data/products";
-
+import { useToggleStore } from "./states/clearState";
 interface Product {
   Product_id: number;
   Product: string;
@@ -17,6 +17,10 @@ interface Product {
 type Props = {};
 
 const App: React.FC<Props> = () => {
+  const { closeToggle, openToggle } = useToggleStore((state: any) => ({
+    closeToggle: state.closeToggle,
+    openToggle: state.openToggle,
+  }));
   const [categoryHandlers, setCategoryHandlers] = useState<string[]>([]);
   const [productsArea, setProductsArea] = useState<Product[]>(products);
   const [pricesArea, setPricesArea] = useState<number[]>(
@@ -28,13 +32,15 @@ const App: React.FC<Props> = () => {
   const categoryHandler = (category: string[]) => {
     setCategoryHandlers(category);
   };
-  const sliderPricesHolder = (values: number[]) => {
-    setSliderPrices(values);
-  };
+
   const [sliderPrices, setSliderPrices] = useState<number[]>([
     Math.min(1),
     Math.max(300),
   ]);
+  const sliderPricesHolder = (values: number[]) => {
+    setSliderPrices(values);
+  };
+
   useEffect(() => {
     if (categoryHandlers.length === 0) {
       const newProducts: Product[] = products.filter((product) => {
@@ -44,7 +50,6 @@ const App: React.FC<Props> = () => {
       });
       setProductsArea(newProducts);
       setPricesArea(products.map((product) => product.Price));
-      return;
     } else {
       const filteredProducts: Product[] = [];
       const prices: number[] = [];
@@ -59,12 +64,16 @@ const App: React.FC<Props> = () => {
         filteredProducts.push(...categoryProducts);
         prices.push(...categoryProducts.map((product) => product.Price));
       });
-
-      setProductsArea(filteredProducts);
       setPricesArea(prices);
+      setProductsArea(filteredProducts);
     }
   }, [categoryHandlers, sliderPrices]);
 
+  const clearAllFilters = () => {
+    setCategoryHandlers([]);
+    setSliderPrices([Math.min(1), Math.max(300)]);
+    setProductsArea(products);
+  };
   return (
     <div className={style.app}>
       <Header />
@@ -74,6 +83,7 @@ const App: React.FC<Props> = () => {
         </div>
         <div className={style.gridContainer}>
           <SideBar
+            clearAllFilters={clearAllFilters}
             onPriceHolder={sliderPricesHolder}
             pricesList={pricesArea}
             categoryHandler={categoryHandler}

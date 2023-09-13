@@ -3,12 +3,22 @@ import React, { useEffect, useState } from "react";
 import Category from "./Category";
 import PriceSlider from "./PriceSlider";
 import { categories } from "../../Data/categories";
+import { useToggleStore } from "../../states/clearState";
+import { open } from "fs/promises";
+
 type CategoriesProps = {
+  clearAllFilters: () => void;
   pricesList: number[];
   categoryHandler: (category: string[]) => void;
   onPriceHolder: (values: number[]) => void;
 };
 const SideBar: React.FC<CategoriesProps> = (props) => {
+  const { toggle, closeToggle, openToggle } = useToggleStore((state: any) => ({
+    toggle: state.toggle,
+    closeToggle: state.closeToggle,
+    openToggle: state.openToggle,
+  }));
+
   const [initialCategory, setInitialCategory] = useState<string[]>(categories);
   const [categoryHandler, setCategoryHandler] = useState<string[]>([]);
   const onRemoveCategory = (category: string): void => {
@@ -36,7 +46,11 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
   let priceValues = props.pricesList;
   useEffect(() => {
     priceValues = props.pricesList;
+    openToggle();
   }, [props.pricesList]);
+  useEffect(() => {
+    closeToggle();
+  }, []);
 
   let filteredArea = categoryHandler.map((category, index) => (
     <p
@@ -67,15 +81,28 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
     setPriceValueHolder(values);
   };
   const filter = async () => {
-    props.onPriceHolder(priceValueHolder)
+    props.onPriceHolder(priceValueHolder);
     props.categoryHandler(categoryHandler);
   };
-
+  const clearFilter = () => {
+    setCategoryHandler([]);
+    props.clearAllFilters();
+    closeToggle();
+  };
   return (
     <div className={style.sideBar}>
       <div className={style.fier}>
         <div className={style.listFiltered}>
-          <p>Filtered:</p>
+          {toggle === false ? (
+            <p>Filtered:</p>
+          ) : (
+            <div className={style.filteredArea}>
+              <p>Filtered:</p>
+              <button onClick={clearFilter} className={style.clearFilter}>
+                Clear Filters
+              </button>
+            </div>
+          )}
           <div className={style.mainArea}>
             {categoryHandler.length === 0 ? (
               <p className={style.message}>no filtered category</p>
@@ -97,6 +124,7 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
           </div>
         </div>
       </div>
+
       <div className={style.priceInput}>
         <p className={style.priceArea}>Shop by Price</p>
         <div className={style.priceFilter}>

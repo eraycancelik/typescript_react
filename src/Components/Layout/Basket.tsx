@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./Basket.module.css";
 import CartIcon from "../Card/CartIcon";
 import { orderList } from "../../Data/orderList";
 import CartListModal from "../OrderModel/CartListModal";
 type Props = {};
 const Basket = (props: Props) => {
-  let sum: number = 0;
-  orderList.map((order) => {
-    sum += order.total_price;
-  });
   const [list, setList] = useState<boolean>(false);
   const listOrders = () => {
     setList(!list);
   };
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  useEffect(() => {
+    const totalPrice = orderList.reduce((accumulator, product) => {
+      return accumulator + product.product_price;
+    }, 0);
+
+    setTotalPrice(totalPrice);
+  }, []);
   return (
     <>
       {list && <CartListModal onClick={listOrders} />}
@@ -21,7 +25,7 @@ const Basket = (props: Props) => {
           <CartIcon className={style.icon} />
         </span>
         <span className={style.cartProduct}>
-          {orderList.length} product / 0.00 ₺
+          {orderList.length} product / {totalPrice} ₺
         </span>
       </button>
     </>
