@@ -4,7 +4,6 @@ import Category from "./Category";
 import PriceSlider from "./PriceSlider";
 import { categories } from "../../Data/categories";
 import { useToggleStore } from "../../states/clearState";
-import { open } from "fs/promises";
 
 type CategoriesProps = {
   clearAllFilters: () => void;
@@ -44,13 +43,11 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
     }
   };
   let priceValues = props.pricesList;
+
   useEffect(() => {
     priceValues = props.pricesList;
     openToggle();
   }, [props.pricesList]);
-  useEffect(() => {
-    closeToggle();
-  }, []);
 
   let filteredArea = categoryHandler.map((category, index) => (
     <p
@@ -85,9 +82,13 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
     props.categoryHandler(categoryHandler);
   };
   const clearFilter = () => {
+    setPriceValueHolder([1, 300]);
+    setInitialCategory(categories);
     setCategoryHandler([]);
+    props.categoryHandler([]);
     props.clearAllFilters();
-    closeToggle();
+    console.log(categoryHandler);
+    console.log(priceValueHolder);
   };
   return (
     <div className={style.sideBar}>

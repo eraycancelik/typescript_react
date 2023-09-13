@@ -7,6 +7,7 @@ import Information from "./Components/Ui/Information";
 import Footer from "./Components/Layout/Footer";
 import { products } from "./Data/products";
 import { useToggleStore } from "./states/clearState";
+import { categories } from "./Data/categories";
 interface Product {
   Product_id: number;
   Product: string;
@@ -32,7 +33,6 @@ const App: React.FC<Props> = () => {
   const categoryHandler = (category: string[]) => {
     setCategoryHandlers(category);
   };
-
   const [sliderPrices, setSliderPrices] = useState<number[]>([
     Math.min(1),
     Math.max(300),
@@ -70,10 +70,11 @@ const App: React.FC<Props> = () => {
   }, [categoryHandlers, sliderPrices]);
 
   const clearAllFilters = () => {
-    setCategoryHandlers([]);
-    setSliderPrices([Math.min(1), Math.max(300)]);
+    setPricesArea([1, 300]);
+    setSliderPrices([1, 300]);
     setProductsArea(products);
   };
+  
   return (
     <div className={style.app}>
       <Header />
