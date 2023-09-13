@@ -46,7 +46,6 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
 
   useEffect(() => {
     priceValues = props.pricesList;
-    openToggle();
   }, [props.pricesList]);
 
   let filteredArea = categoryHandler.map((category, index) => (
@@ -78,6 +77,7 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
     setPriceValueHolder(values);
   };
   const filter = async () => {
+    openToggle();
     props.onPriceHolder(priceValueHolder);
     props.categoryHandler(categoryHandler);
   };
@@ -125,7 +125,6 @@ const SideBar: React.FC<CategoriesProps> = (props) => {
           </div>
         </div>
       </div>
-
       <div className={style.priceInput}>
         <p className={style.priceArea}>Shop by Price</p>
         <div className={style.priceFilter}>

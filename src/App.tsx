@@ -73,8 +73,9 @@ const App: React.FC<Props> = () => {
     setPricesArea([1, 300]);
     setSliderPrices([1, 300]);
     setProductsArea(products);
+    closeToggle();
   };
-  
+
   return (
     <div className={style.app}>
       <Header />
