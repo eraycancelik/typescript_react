@@ -33,13 +33,7 @@ const ModelOverlayList = (props: Props) => {
   }, [quantityNew]);
 
   const deleteItem = () => {
-    console.log(orderList);
-    console.log(props.id);
-    let item = orderList.find(
-      (orderItem: OrderDetails) => orderItem.product_id === props.id
-    );
-    console.log(item);
-    removeFromOrderList(item);
+    removeFromOrderList(orderList[props.id]);
   };
 
   return (
