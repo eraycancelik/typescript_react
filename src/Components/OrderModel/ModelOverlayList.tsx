@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import style from "./ModelOverlayList.module.css";
 import OrderTableQuantity from "../Quantity/OrderTableQuantity";
+import { useOrderListStore } from "../../states/basketstate";
 type Props = {
   remove?: (id: number) => void;
   id: number;
@@ -12,7 +13,17 @@ type Props = {
   onClick: () => void;
   onQuantityHolder: (quantity: number) => void;
 };
+interface OrderDetails {
+  product_id: number;
+  product_name: string;
+  product_photo: string;
+  product_price: number;
+  product_quantity: number;
+  total_price: number;
+}
 const ModelOverlayList = (props: Props) => {
+  const { orderList, removeFromOrderList } = useOrderListStore();
+
   const [quantityNew, setQuantity] = useState<number>(props.quantity);
   const onQuantityHolder = (quantity: number) => {
     setQuantity(quantity);
@@ -22,9 +33,13 @@ const ModelOverlayList = (props: Props) => {
   }, [quantityNew]);
 
   const deleteItem = () => {
-    if (props.remove) {
-      props.remove(props.id);
-    }
+    console.log(orderList);
+    console.log(props.id);
+    let item = orderList.find(
+      (orderItem: OrderDetails) => orderItem.product_id === props.id
+    );
+    console.log(item);
+    removeFromOrderList(item);
   };
 
   return (

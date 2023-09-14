@@ -1,9 +1,10 @@
-import { Fragment, useState } from "react";
+import { Fragment, Key, useState } from "react";
 import ReactDOM from "react-dom";
 import style from "./CartListModal.module.css";
 import ModelOverlayList from "./ModelOverlayList";
 import Button from "../Ui/Button";
 import { orderList, removeItem } from "../../Data/orderList";
+import { useOrderListStore } from "../../states/basketstate";
 // these are the props that will be used in the CartListModal component
 type Props = {
   onClick: () => void;
@@ -31,17 +32,25 @@ const CartModalOverlay = (props: CartModalOverlayProps) => {
   const remove = (id: number) => {
     removeItem(id, rendered, setRendered);
   };
-  const somea = () => {
-    console.log(orderList);
-  };
+  const somea = () => {};
   let renderedItems: any = (
     <tr className={style.empty}>
       <td className={style.conte}>cart is empty</td>
     </tr>
   );
-  if (orderList.length !== 0) {
-    renderedItems = rendered.map(
-      (order, index) => (
+  const Basket = useOrderListStore((state: any) => state.orderList);
+  if (Basket.length !== 0) {
+    renderedItems = Basket.map(
+      (
+        order: {
+          product_id: number;
+          product_name: string;
+          product_photo: string;
+          product_price: number;
+          product_quantity: number;
+        },
+        index: number
+      ) => (
         (id = order.product_id),
         (products = order.product_name),
         (photos = order.product_photo),

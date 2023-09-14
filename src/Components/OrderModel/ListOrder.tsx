@@ -3,6 +3,7 @@ import ModelOverlayList from "./ModelOverlayList";
 import Button from "../Ui/Button";
 import { useState } from "react";
 import { orderList, addItem } from "../../Data/orderList";
+import { useOrderListStore } from "../../states/basketstate";
 type Props = {
   id: number;
   order: boolean;
@@ -32,6 +33,7 @@ const ListOrder = (props: Props) => {
     setQuantity(quanta);
     setTotalPrice(quanta * props.price);
   };
+  const addOrder = useOrderListStore.getState().addToOrderList;
   async function getOrder() {
     props.setOrder(!props.order);
     const orderDetails: OrderDetails = {
@@ -46,12 +48,14 @@ const ListOrder = (props: Props) => {
       orderList.filter((order) => order.product_id === props.id).length === 0
     ) {
       console.log("new item added");
-      addItem(orderDetails);
+
+      addOrder(orderDetails);
     } else {
       orderList.map((order) => {
         if (orderDetails.product_id === order.product_id) {
-          order.product_quantity += orderDetails.product_quantity;
-          order.total_price += orderDetails.total_price;
+          order.product_quantity = orderDetails.product_quantity;
+          order.total_price = orderDetails.total_price;
+          console.log("item quantity updated");
         }
       });
     }

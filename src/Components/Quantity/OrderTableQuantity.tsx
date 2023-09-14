@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import style from "./OrderTableQuantity.module.css";
 import { orderList } from "../../Data/orderList";
+import { useOrderListStore } from "../../states/basketstate";
 type Props = {
   id: number;
   className: string;
@@ -8,14 +9,20 @@ type Props = {
   quantityHolder: (price: number) => void;
 };
 const OrderTableQuantity = (props: Props) => {
+  const { increaseOrderQuantity, decreaseOrderQuantity } = useOrderListStore();
+
+  const Basket = useOrderListStore.getState().orderList;
   const [quantityNew, setQuantity] = useState<number>(props.quantity);
   const increaseQuantity = () => {
+    console.log(props.id);
     setQuantity((prevQuantity) => prevQuantity + 1);
     if (orderList[props.id]) {
       orderList[props.id].product_quantity = quantityNew + 1;
       orderList[props.id].total_price =
         orderList[props.id].product_price * (quantityNew + 1);
+      increaseOrderQuantity(props.id + 1, quantityNew + 1);
     } else {
+      increaseOrderQuantity(props.id + 1, quantityNew + 1);
       setQuantity(quantityNew + 1);
     }
     props.quantityHolder(quantityNew + 1);
@@ -27,8 +34,10 @@ const OrderTableQuantity = (props: Props) => {
         orderList[props.id].product_quantity = quantityNew - 1;
         orderList[props.id].total_price =
           orderList[props.id].product_price * (quantityNew - 1);
+        decreaseOrderQuantity(props.id + 1, quantityNew - 1);
       } else {
         setQuantity(quantityNew - 1);
+        decreaseOrderQuantity(props.id + 1, quantityNew - 1);
       }
       props.quantityHolder(quantityNew - 1);
     }
