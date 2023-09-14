@@ -4,7 +4,7 @@ import CartIcon from "../Card/CartIcon";
 import CartListModal from "../OrderModel/CartListModal";
 import { useOrderListStore } from "../../states/basketstate";
 type Props = {};
-const orderList = (props: Props) => {
+const Basket = (props: Props) => {
   const total = useOrderListStore.getState().calculateTotalPrice();
   const orderList = useOrderListStore((state) => state.orderList);
 
@@ -26,4 +26,4 @@ const orderList = (props: Props) => {
     </>
   );
 };
-export default orderList;
+export default Basket;
