@@ -1,3 +1,5 @@
+footer {
+}
 .footer {
   display: flex;
   justify-content: center;
@@ -5,6 +7,9 @@
   color: var(--theme-color);
   background-color: var(--header-color);
   margin: 0px;
-  height: 100px;
+  height: 70px;
   font-size: smaller;
+  position: sticky;
+  bottom: 0px;
+  width: 100%;
 }
