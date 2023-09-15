@@ -5,6 +5,7 @@ import ModelOverlayList from "./ModelOverlayList";
 import Button from "../Ui/Button";
 import { orderList, removeItem } from "../../Data/orderList";
 import { useOrderListStore } from "../../states/basketstate";
+import BuyButton from "../Ui/BuyButton";
 // these are the props that will be used in the CartListModal component
 type Props = {
   onClick: () => void;
@@ -32,14 +33,23 @@ const CartModalOverlay = (props: CartModalOverlayProps) => {
   const remove = (id: number) => {
     removeItem(id, rendered, setRendered);
   };
-  const somea = () => {};
+  const somea = () => {
+    props.onClick();
+  };
   let renderedItems: any = (
     <tr className={style.empty}>
       <td className={style.conte}>cart is empty</td>
     </tr>
   );
   const Basket = useOrderListStore((state: any) => state.orderList);
+  let ButtonArea = <Button message={"continue to shopping"} onClick={somea} />;
   if (Basket.length !== 0) {
+    ButtonArea = (
+      <div className={style.buttons}>
+        <Button message={"continue to shopping"} onClick={somea} />
+        <BuyButton />
+      </div>
+    );
     renderedItems = Basket.map(
       (
         order: {
@@ -91,7 +101,7 @@ const CartModalOverlay = (props: CartModalOverlayProps) => {
         </thead>
         <tbody>{renderedItems}</tbody>
       </table>
-      <Button message={"continue to shopping"} onClick={somea} />
+      {ButtonArea}
     </div>
   );
 };

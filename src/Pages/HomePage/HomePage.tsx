@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import style from "./ProductsPage.module.css";
-import ProductList from "../Components/Product/ProductList";
-import SideBar from "../Components/SideBar/SideBar";
-import Information from "../Components/Ui/Information";
-import { products } from "../Data/products";
-import { useToggleStore } from "../states/clearState";
-
+import style from "./HomePage.module.css";
+import ProductList from "../../Components/Product/ProductList";
+import SideBar from "../../Components/SideBar/SideBar";
+import Information from "../../Components/Ui/Information";
+import { products } from "../../Data/products";
+import { useToggleStore } from "../../states/clearState";
 interface Product {
   Product_id: number;
   Product: string;
@@ -16,7 +15,7 @@ interface Product {
 type Props = {};
 
 const ProductsPage: React.FC<Props> = () => {
-  const { closeToggle, openToggle } = useToggleStore((state: any) => ({
+  const { closeToggle } = useToggleStore((state: any) => ({
     closeToggle: state.closeToggle,
     openToggle: state.openToggle,
   }));
@@ -75,7 +74,7 @@ const ProductsPage: React.FC<Props> = () => {
   };
 
   return (
-    <div className={style.flexContainer}>
+    <section className={style.flexContainer}>
       <div className={style.flex}>
         <Information />
       </div>
@@ -88,7 +87,7 @@ const ProductsPage: React.FC<Props> = () => {
         />
         <ProductList productList={productsArea} />
       </div>
-    </div>
+    </section>
   );
 };
 
