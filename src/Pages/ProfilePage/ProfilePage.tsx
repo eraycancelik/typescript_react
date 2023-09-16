@@ -1,10 +1,9 @@
 import style from "./ProfilePage.module.css";
-import PersonalForm from "../../Components/Form/PersonalForm";
+import PersonalForm from "../../Components/Form/PersonalForm/PersonalForm";
 const ProfilePage = () => {
   return (
     <>
       <section className={style.main}>
-        <h1>Profile Page</h1>
         <div className={style.area}>
           <div className={style.buttonArea}>
             <button className={style.mainButton}>Settings</button>
