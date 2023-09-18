@@ -7,10 +7,23 @@
   font-size: larger;
 }
 .button {
-  padding: 10px;
+  color: black;
+  margin: 10px;
+  margin-right: 20px;
+  font-size: larger;
+  font-family: profileFont;
+}
+.active {
+  margin: 10px;
+  margin-right: 20px;
   font-size: larger;
   margin-left: 40px;
+  font-family: profileFont;
+  color: brown;
 }
 .settings {
   font-size: 35px;
+  font-family: logoFont;
+  font-weight: 100;
+  color: brown;
 }

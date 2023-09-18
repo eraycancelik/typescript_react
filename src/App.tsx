@@ -15,8 +15,8 @@ const App = () => {
           <Route index element={<ProductsPage />} />
           <Route path="profile" element={<ProfilePage />}>
             <Route index element={<PersonalForm />} />
-            <Route path="/profile/addresses" element={<AddressForm />} />
-            <Route path="/profile/payment_methods" element={<PaymentForm />} />
+            <Route path="addresses" element={<AddressForm />} />
+            <Route path="payment_methods" element={<PaymentForm />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Route>

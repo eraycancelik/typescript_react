@@ -8,7 +8,11 @@ input::-webkit-inner-spin-button {
   font-family: "logoFont";
   src: url("../public/Assets/fonts/Mrrobot-g123.ttf") format("opentype");
 }
-
+@font-face {
+  font-family: "profileFont";
+  src: url("../public/Assets/fonts/YatraOne-Regular.ttf") format("opentype");
+}
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Exo&display=swap");
 :root {
   --header-color: rgb(0, 0, 0);
   --theme-color: rgb(255, 0, 0);
@@ -29,14 +33,12 @@ input::-webkit-inner-spin-button {
   --addBasket-shadow: rgb(255, 0, 0) 0px 1px 1px,
     rgb(255, 122, 122) 0px 0px 0px 3px;
 }
-/* --main-color: rgb(255, 247, 141); 9/10 */
-/* --main-color: rgb(238, 238, 238); 9/10 */
 
 body {
   margin: 0;
   padding: 0;
   height: 100%; /* needed for container min-height */
-  
+
   font-family: arial, sans-serif;
   color: #666;
   font-family: Arial, Helvetica, sans-serif;
