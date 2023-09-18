@@ -1,5 +1,22 @@
 .liste {
-  max-height: 430px; /* İstenilen maksimum yükseklik */
+  min-height: 400px;
+  max-height: 500px; /* İstenilen maksimum yükseklik */
   overflow: auto; /* Scroll çubuğunu etkinleştirir */
   overflow-x: hidden;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.noAdress {
+  width: 200px;
 }
