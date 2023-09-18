@@ -17,12 +17,12 @@ const ProfileButtonsArea = () => {
       >
         Address
       </NavLink>
-      <NavLink
+      {/* <NavLink
         to={"payment_methods"}
         className={({ isActive }) => (isActive ? style.active : style.button)}
       >
         Payment
-      </NavLink>
+      </NavLink> */}
     </div>
   );
 };
