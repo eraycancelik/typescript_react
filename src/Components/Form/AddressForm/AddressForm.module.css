@@ -1,0 +1,5 @@
+.liste {
+  max-height: 430px; /* İstenilen maksimum yükseklik */
+  overflow: auto; /* Scroll çubuğunu etkinleştirir */
+  overflow-x: hidden;
+}

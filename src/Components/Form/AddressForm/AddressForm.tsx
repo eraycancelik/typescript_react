@@ -9,9 +9,13 @@ import {
   Button,
   useDisclosure,
   SimpleGrid,
+  Heading,
+  Highlight,
 } from "@chakra-ui/react";
 import { useAddressStore } from "../../../states/addressState";
 import AddressCard from "./AddressCard";
+import style from "./AddressForm.module.css";
+
 type AddressProp = {};
 function AddressForm() {
   const address = useAddressStore((state) => state.address);
@@ -28,23 +32,36 @@ function AddressForm() {
   }
   return (
     <>
-      <SimpleGrid width={"700px"} columns={2} spacing={10}>
-        {content}
-        {/* <AddressCard onOpen={onOpen} /> */}
-      </SimpleGrid>
+      <div>
+        <Heading textAlign={"center"} mb={"50px"}>
+          Your Addresses
+        </Heading>
+        <div className={style.liste}>
+          <SimpleGrid width={"700px"} columns={3} spacing={"20px"}>
+            {content}
+            {/* <AddressCard onOpen={onOpen} /> */}
+          </SimpleGrid>
+        </div>
+      </div>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isCentered isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Confirm Address Deletion</ModalHeader>
           <ModalCloseButton />
           <ModalBody>"Are you sure you want to proceed?"</ModalBody>
-
           <ModalFooter>
             <Button colorScheme="red" mr={3} onClick={deleteme}>
               Delete
             </Button>
-            <Button variant="ghost">Cancel</Button>
+            <Button
+              onClick={() => {
+                onClose();
+              }}
+              variant="ghost"
+            >
+              Cancel
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
