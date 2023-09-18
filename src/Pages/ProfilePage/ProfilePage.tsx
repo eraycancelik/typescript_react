@@ -1,18 +1,14 @@
 import style from "./ProfilePage.module.css";
-import PersonalForm from "../../Components/Form/PersonalForm/PersonalForm";
+import ProfileButtonsArea from "./ProfileButtonsArea";
+import { Outlet } from "react-router-dom";
 const ProfilePage = () => {
   return (
     <>
       <section className={style.main}>
         <div className={style.area}>
-          <div className={style.buttonArea}>
-            <button className={style.mainButton}>Settings</button>
-            <button className={style.button}>Personal</button>
-            <button className={style.button}>Address</button>
-            <button className={style.button}>Payment</button>
-          </div>
+          <ProfileButtonsArea />
           <div className={style.contentArea}>
-            <PersonalForm />
+            <Outlet />
           </div>
         </div>
       </section>

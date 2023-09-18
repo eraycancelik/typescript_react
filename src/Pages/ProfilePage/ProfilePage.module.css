@@ -6,36 +6,18 @@
   align-items: center;
 }
 .area {
-  margin-top: 50px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  max-width: 1000px;
-}
-.buttonArea {
-  min-width: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  font-size: larger;
-}
-.button {
-  padding: 10px;
-  font-size: larger;
-  margin-left: 40px;
-}
-.mainButton {
-  font-size: 35px;
+  width: 1000px;
+  height: 600px;
 }
 .contentArea {
-  min-width: 700px;
-  /* box-shadow: var(--main-shadow); */
-  /* border: 1px solid rgba(0, 0, 0, 0.336);
-  border-radius: 30px; */
+  margin-left: 100px;
+  width: 800px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: start;
   align-items: center;
   font-size: larger;

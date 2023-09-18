@@ -1,11 +1,10 @@
-import React from "react";
 import style from "./PersonalForm.module.css";
 import EmailInput from "./EmailInput";
 import Name from "./Name";
 import WebSite from "./WebSite";
 import SurName from "./Surname";
 import ProfileImage from "./ProfileImage";
-import { InputGroup, Box, Image } from "@chakra-ui/react";
+import { InputGroup } from "@chakra-ui/react";
 const PersonalForm = () => {
   return (
     <div className={style.main}>

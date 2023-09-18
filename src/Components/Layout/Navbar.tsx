@@ -1,8 +1,8 @@
-import style from "./Header.module.css";
+import style from "./Navbar.module.css";
 import Basket from "./Basket";
 import PersonIcon from "../Card/PersonIcon";
 import { Link } from "react-router-dom";
-const Header = () => {
+const Navbar = () => {
   return (
     <header>
       <div className={style.hedir}>
@@ -23,4 +23,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;

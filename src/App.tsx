@@ -1,20 +1,26 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Footer from "./Components/Layout/Footer";
-import Header from "./Components/Layout/Header";
 import ProductsPage from "./Pages/HomePage/HomePage";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage";
+import SharedLayout from "./Pages/SharedLayout/SharedLayout";
+import PersonalForm from "./Components/Form/PersonalForm/PersonalForm";
+import AddressForm from "./Components/Form/AddressForm/AddressForm";
+import PaymentForm from "./Components/Form/PaymentForm/PaymentForm";
 import "./App.css";
 const App = () => {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
-        <Route path="/" element={<ProductsPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<ProductsPage />} />
+          <Route path="profile" element={<ProfilePage />}>
+            <Route index element={<PersonalForm />} />
+            <Route path="/profile/addresses" element={<AddressForm />} />
+            <Route path="/profile/payment_methods" element={<PaymentForm />} />
+          </Route>
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 };

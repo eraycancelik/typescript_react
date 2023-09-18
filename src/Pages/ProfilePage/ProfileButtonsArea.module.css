@@ -1,0 +1,16 @@
+.buttonArea {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  font-size: larger;
+}
+.button {
+  padding: 10px;
+  font-size: larger;
+  margin-left: 40px;
+}
+.settings {
+  font-size: 35px;
+}
