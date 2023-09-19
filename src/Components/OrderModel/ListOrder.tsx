@@ -65,7 +65,7 @@ const ListOrder = (props: Props) => {
       <table className={style.gridContainer}>
         <thead>
           <tr>
-            <th>Product</th>
+            <th className={style.prod}>Product</th>
             <th>Product Name</th>
             <th>Quantity</th>
             <th>Unit Price</th>

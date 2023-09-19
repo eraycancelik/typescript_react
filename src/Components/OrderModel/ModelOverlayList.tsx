@@ -39,7 +39,7 @@ const ModelOverlayList = (props: Props) => {
 
   return (
     <tr>
-      <td>
+      <td className={style.photoHolder}>
         <img src={props.photo} alt="product" className={style.gridItem} />
       </td>
       <td>{props.product}</td>

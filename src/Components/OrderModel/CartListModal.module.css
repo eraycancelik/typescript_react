@@ -65,3 +65,9 @@
   color: aquamarine;
   font-size: 22px;
 }
+.ora {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}

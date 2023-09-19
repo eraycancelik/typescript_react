@@ -7,6 +7,20 @@ import { orderList, removeItem } from "../../Data/orderList";
 import { useOrderListStore } from "../../states/basketstate";
 import BuyButton from "../Ui/BuyButton";
 import { Link } from "react-router-dom";
+import { DeleteIcon } from "@chakra-ui/icons";
+import { ButtonGroup, useDisclosure } from "@chakra-ui/react";
+import {
+  Button as ChakraButton,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
+import { clear } from "console";
+import { stat } from "fs";
 // these are the props that will be used in the CartListModal component
 type Props = {
   onClick: () => void;
@@ -45,6 +59,13 @@ const CartModalOverlay = (props: CartModalOverlayProps) => {
   const Basket = useOrderListStore((state: any) => state.orderList);
   const priceSum = useOrderListStore((state: any) => state.calculateTotalPrice);
   let ButtonArea = <Button message={"continue to shopping"} onClick={somea} />;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { clearOrderList } = useOrderListStore();
+  const clearCart = () => {
+    clearOrderList();
+    onClose();
+    props.onClick();
+  };
   if (Basket.length !== 0) {
     ButtonArea = (
       <div className={style.result}>
@@ -56,9 +77,25 @@ const CartModalOverlay = (props: CartModalOverlayProps) => {
         </div>
         <div className={style.buttons}>
           <Button message={"continue to shopping"} onClick={somea} />
-          <Link target="_blank" to="https://www.savethestudent.org/make-money/10-quick-cash-injections.html">
-            <BuyButton />
-          </Link>
+          <div className={style.ora}>
+            <DeleteIcon
+              onClick={onOpen}
+              _hover={{ color: "red.500" }}
+              fontSize={"35px"}
+              border={"1px solid"}
+              borderRadius={"50%"}
+              padding={"5px"}
+              color={"white"}
+              cursor={"pointer"}
+              mr={"15px"}
+            />
+            <Link
+              target="_blank"
+              to="https://www.savethestudent.org/make-money/10-quick-cash-injections.html"
+            >
+              <BuyButton />
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -114,6 +151,39 @@ const CartModalOverlay = (props: CartModalOverlayProps) => {
         <tbody>{renderedItems}</tbody>
       </table>
       {ButtonArea}
+      <Modal
+        isCentered
+        blockScrollOnMount={false}
+        isOpen={isOpen}
+        onClose={onClose}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Confirm Clearing Cart</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <p>Are you sure you want to clear your cart? </p>
+          </ModalBody>
+
+          <ModalFooter>
+            <ButtonGroup>
+              <ChakraButton
+                colorScheme="teal"
+                variant="outline"
+                mr={3}
+                onClick={() => {
+                  clearCart();
+                }}
+              >
+                Clear Cart
+              </ChakraButton>
+              <ChakraButton onClick={onClose} variant="ghost">
+                Cancel
+              </ChakraButton>
+            </ButtonGroup>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };

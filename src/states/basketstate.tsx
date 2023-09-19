@@ -14,6 +14,7 @@ type OrderListStore = {
   calculateTotalPrice: () => number;
   increaseOrderQuantity: (productId: number, quantity: number) => void;
   decreaseOrderQuantity: (productId: number, quantity: number) => void;
+  clearOrderList: () => void;
 };
 
 export const useOrderListStore = create<OrderListStore>((set) => ({
@@ -65,4 +66,8 @@ export const useOrderListStore = create<OrderListStore>((set) => ({
           total + orderItem.total_price,
         0
       ),
+  clearOrderList: () =>
+    set((state) => {
+      return { orderList: [] };
+    }),
 }));
