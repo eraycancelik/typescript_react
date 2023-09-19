@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import {
   Heading,
   Text,
@@ -24,7 +24,15 @@ import { PhoneIcon } from "@chakra-ui/icons";
 import { useAddressStore } from "../../../states/addressState";
 import { useDisclosure } from "@chakra-ui/react";
 type AddressProp = {};
-
+interface address {
+  id: number;
+  addressType: string;
+  country: string;
+  street: string;
+  city: string;
+  zipcode: string;
+  phone: string;
+}
 const AddressCard = (props: AddressProp) => {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
@@ -54,30 +62,35 @@ const AddressCard = (props: AddressProp) => {
   const addresses = useAddressStore((state) => state.address);
 
   const setEditAddress = useAddressStore((state) => state.setEditAddress);
-  const addressToEdit = useAddressStore((state) => state.addressToEdit);
   const editAdress = useAddressStore((state) => state.editAddress);
+  const addressToEdit = useAddressStore((state) => state.addressToEdit);
 
-  const [addressType, setAddressType] = useState(addressToEdit.addressType);
-  const [country, setCountry] = useState(addressToEdit.country);
-  const [street, setStreet] = useState(addressToEdit.street);
-  const [city, setCity] = useState(addressToEdit.city);
-  const [zipcode, setZipcode] = useState(addressToEdit.zipcode);
-  const [phone, setPhone] = useState(addressToEdit.phone);
+  const [newAddressType, setAddressType] = useState(addressToEdit.addressType);
+  const [newCountry, setCountry] = useState(addressToEdit.country);
+  const [newStreet, setStreet] = useState(addressToEdit.street);
+  const [newCity, setCity] = useState(addressToEdit.city);
+  const [newZipcode, setZipcode] = useState(addressToEdit.zipcode);
+  const [newPhone, setPhone] = useState(addressToEdit.phone);
 
-  const editAddress = (props) => {
+  const editAddress = (props: address) => {
     setEditAddress(props);
-    console.log(addressToEdit.id);
+    setAddressType(props.addressType);
+    setCountry(props.country);
+    setStreet(props.street);
+    setCity(props.city);
+    setZipcode(props.zipcode);
+    setPhone(props.phone);
     onOpenEdit();
   };
   const saveAddress = () => {
     const newAddress = {
       id: addressToEdit.id,
-      addressType: addressType,
-      country: country,
-      street: street,
-      city: city,
-      zipcode: zipcode,
-      phone: phone,
+      addressType: newAddressType,
+      country: newCountry,
+      street: newStreet,
+      city: newCity,
+      zipcode: newZipcode,
+      phone: newPhone,
     };
     editAdress(newAddress);
 
@@ -85,7 +98,7 @@ const AddressCard = (props: AddressProp) => {
   };
   const addressList = addresses.map((address) => {
     return (
-      <>
+      <div key={address.id}>
         <Card mb={"5px"} boxShadow="md" width={"200px"} height={"330px"}>
           <CardHeader>
             <Heading size="md">{address.addressType}</Heading>
@@ -115,7 +128,7 @@ const AddressCard = (props: AddressProp) => {
             </Button>
           </CardFooter>
         </Card>
-      </>
+      </div>
     );
   });
   return (
@@ -166,7 +179,7 @@ const AddressCard = (props: AddressProp) => {
             <FormControl>
               <FormLabel ref={initialRef}>Address type</FormLabel>
               <Input
-                value={addressToEdit.addressType}
+                value={newAddressType}
                 onChange={(e) => setAddressType(e.target.value)}
                 placeholder="home etc."
               />
@@ -174,7 +187,7 @@ const AddressCard = (props: AddressProp) => {
             <FormControl>
               <FormLabel>Street</FormLabel>
               <Input
-                value={addressToEdit.street}
+                value={newStreet}
                 onChange={(e) => {
                   setStreet(e.target.value);
                 }}
@@ -184,6 +197,7 @@ const AddressCard = (props: AddressProp) => {
             <FormControl>
               <FormLabel>City</FormLabel>
               <Input
+                value={newCity}
                 onChange={(e) => {
                   setCity(e.target.value);
                 }}
@@ -193,6 +207,7 @@ const AddressCard = (props: AddressProp) => {
             <FormControl>
               <FormLabel>Country</FormLabel>
               <Input
+                value={newCountry}
                 onChange={(e) => {
                   setCountry(e.target.value);
                 }}
@@ -202,6 +217,7 @@ const AddressCard = (props: AddressProp) => {
             <FormControl>
               <FormLabel>Zip code</FormLabel>
               <Input
+                value={newZipcode}
                 onChange={(e) => {
                   setZipcode(e.target.value);
                 }}
@@ -215,6 +231,7 @@ const AddressCard = (props: AddressProp) => {
                   <PhoneIcon color="gray.300" />
                 </InputLeftElement>
                 <Input
+                  value={newPhone}
                   onChange={(e) => {
                     setPhone(e.target.value);
                   }}

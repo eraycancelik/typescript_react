@@ -21,17 +21,7 @@ interface AddressDetails {
   addressToEdit: address;
 }
 export const useAddressStore = create<AddressDetails>((set) => ({
-  address: [
-    {
-      id: 1,
-      addressType: "Home",
-      country: "India",
-      street: "Street 1",
-      city: "Bangalore",
-      zipcode: "560100",
-      phone: "9876543210",
-    },
-  ],
+  address: [],
   addressToDelete: {
     id: 0,
     addressType: "",
