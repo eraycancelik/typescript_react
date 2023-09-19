@@ -1,4 +1,4 @@
-import { Fragment, Key, useState } from "react";
+import { Fragment, useState } from "react";
 import ReactDOM from "react-dom";
 import style from "./CartListModal.module.css";
 import ModelOverlayList from "./ModelOverlayList";
@@ -6,6 +6,7 @@ import Button from "../Ui/Button";
 import { orderList, removeItem } from "../../Data/orderList";
 import { useOrderListStore } from "../../states/basketstate";
 import BuyButton from "../Ui/BuyButton";
+import { Link } from "react-router-dom";
 // these are the props that will be used in the CartListModal component
 type Props = {
   onClick: () => void;
@@ -42,12 +43,23 @@ const CartModalOverlay = (props: CartModalOverlayProps) => {
     </tr>
   );
   const Basket = useOrderListStore((state: any) => state.orderList);
+  const priceSum = useOrderListStore((state: any) => state.calculateTotalPrice);
   let ButtonArea = <Button message={"continue to shopping"} onClick={somea} />;
   if (Basket.length !== 0) {
     ButtonArea = (
-      <div className={style.buttons}>
-        <Button message={"continue to shopping"} onClick={somea} />
-        <BuyButton />
+      <div className={style.result}>
+        <div className={style.priceSumArea}>
+          <div className={style.priceTitle}>Total Price:</div>
+          <div className={style.priceNumber}>
+            {priceSum()} <span>₺</span>
+          </div>
+        </div>
+        <div className={style.buttons}>
+          <Button message={"continue to shopping"} onClick={somea} />
+          <Link target="_blank" to="https://www.savethestudent.org/make-money/10-quick-cash-injections.html">
+            <BuyButton />
+          </Link>
+        </div>
       </div>
     );
     renderedItems = Basket.map(
@@ -106,7 +118,7 @@ const CartModalOverlay = (props: CartModalOverlayProps) => {
   );
 };
 
-// from here, the code will execute via the CartListModal component
+// from here, the code will execute by the CartListModal component
 const CartListModal = (props: Props) => {
   return (
     <Fragment>

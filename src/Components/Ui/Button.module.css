@@ -1,10 +1,9 @@
 .Button,
 .Button:after {
   cursor: pointer;
-  margin-top: 20px;
   width: 70px;
-  height: 38px;
-  line-height: 38px;
+  height: 58px;
+  line-height: 58px;
   font-size: 15px;
   font-weight: bolder;
   font-family: "Bebas Neue", sans-serif;
@@ -18,7 +17,6 @@
   user-select: none;
   touch-action: manipulation;
 }
-
 .Button:after {
   --slice-0: inset(50% 50% 50% 50%);
   --slice-1: inset(80% -6px 0 0);
@@ -101,7 +99,7 @@
   .Button,
   .Button:after {
     width: fit-content;
-    height: 43px;
+    height: 53px;
     line-height: 44px;
   }
 }
