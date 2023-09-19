@@ -1,4 +1,3 @@
-import React from "react";
 import { InputGroup, InputLeftAddon, Input, FormLabel } from "@chakra-ui/react";
 const WebSite = () => {
   return (
@@ -13,7 +12,7 @@ const WebSite = () => {
           placeholder="212487****"
         />
         <InputLeftAddon children="https://" />
-        <Input variant={"filled"} placeholder="erayc.works" />
+        <Input variant={"filled"} placeholder="ecorp.com" />
       </InputGroup>
     </div>
   );

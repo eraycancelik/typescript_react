@@ -5,7 +5,6 @@ import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 import SharedLayout from "./Pages/SharedLayout/SharedLayout";
 import PersonalForm from "./Components/Form/PersonalForm/PersonalForm";
 import AddressForm from "./Components/Form/AddressForm/AddressForm";
-import PaymentForm from "./Components/Form/PaymentForm/PaymentForm";
 import "./App.css";
 const App = () => {
   return (
@@ -16,7 +15,6 @@ const App = () => {
           <Route path="profile" element={<ProfilePage />}>
             <Route index element={<PersonalForm />} />
             <Route path="addresses" element={<AddressForm />} />
-            <Route path="payment_methods" element={<PaymentForm />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Route>
