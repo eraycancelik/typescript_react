@@ -4,7 +4,7 @@ const WebSite = () => {
     <div>
       <FormLabel>Contact</FormLabel>
       <InputGroup>
-        <InputLeftAddon children="+1" />
+        <InputLeftAddon children="+1" />  
         <Input
           mr={"10px"}
           variant={"filled"}
