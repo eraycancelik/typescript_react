@@ -34,7 +34,6 @@ const ModelOverlayList = (props: Props) => {
 
   const deleteItem = () => {
     removeFromOrderList(orderList[props.id]);
-    props.onClick();
   };
 
   return (
